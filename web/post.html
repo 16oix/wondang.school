@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>게시글</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body class="glass">
+
+<header>
+  <div class="logo-text">원당중학교 익명 게시판</div>
+</header>
+
+<button class="btn small" onclick="goBack()">⬅ 뒤로가기</button>
+
+<div id="avatar-box"></div>
+<h2 id="title-box"></h2>
+<p id="content-box"></p>
+
+<button class="btn small" onclick="likePost()">♥ 좋아요 (<span id="like-count"></span>)</button>
+<button class="btn danger small" onclick="deletePost(Number(new URLSearchParams(location.search).get('id')))">관리자 삭제</button>
+
+<h3>댓글</h3>
+<div id="comment-list"></div>
+
+<textarea id="comment-input" class="textarea" placeholder="댓글"></textarea>
+<button class="btn" onclick="addComment()">등록</button>
+
+<script src="avatar.js"></script>
+<script src="theme.js"></script>
+<script src="app.js"></script>
+</body>
+</html>

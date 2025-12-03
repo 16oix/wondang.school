@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>관리자</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body class="glass">
+
+<header>
+  <div class="logo-text">원당중학교 익명 게시판</div>
+</header>
+
+<button class="btn small" onclick="goBack()">⬅ 뒤로가기</button>
+<h1>🛠 관리자 모드</h1>
+
+<h3>통계</h3>
+<div id="stats"></div>
+
+<h3>설정</h3>
+<label>다크모드</label>
+<button class="btn" onclick="toggleDarkMode()">토글</button>
+<label>아바타 타입</label>
+<select id="avatar-type" class="input">
+  <option value="circle">원형</option>
+  <option value="pattern">패턴</option>
+  <option value="pixel">픽셀</option>
+</select>
+
+<h3>게시글 관리</h3>
+<div id="admin-posts"></div>
+
+<script src="avatar.js"></script>
+<script src="theme.js"></script>
+<script src="app.js"></script>
+<script>
+let pw = prompt("관리자 비밀번호:");
+if(pw!=="admin123"){ alert("접근 불가"); location.href="index.html"; }
+
+let posts = JSON.parse(localStorage.getItem("posts")) || [];
+const statsDiv = document.getElementById("stats");
+const adminDiv = document.getElementById("admin-posts");
+
+let v = JSON.parse(localStorage.getItem("visits")) || {};
+let html="";
+for(let day in v){ html += `<div>${day}: ${v[day]}회 방문</div>`; }
+statsDiv.innerHTML = html;
+
+const select = document.getElementById("avatar-type");
+select.value = localStorage.getItem("avatarType") || "circle";
+select.addEventListener("change", ()=>{
+  localStorage.setItem("avatarType", select.value);
+  alert("설정 저장됨");
+});
+
+function renderAdminPosts(){
+  adminDiv.innerHTML = "";
+  posts.slice().reverse().forEach(p=>{
+    adminDiv.innerHTML += `<div class="glass">
+      ${p.avatar} <b>${p.title}</b> - ${p.date}<br>
+      <button class="btn small danger" onclick="deleteAdminPost(${p.id})">삭제</button>
+    </div>`;
+  });
+}
+
+function deleteAdminPost(id){
+  const pw = prompt("관리자 비밀번호:");
+  if(pw!=="admin123") return alert("비밀번호 틀림");
+  posts = posts.filter(x=>x.id!==Number(id));
+  localStorage.setItem("posts", JSON.stringify(posts));
+  renderAdminPosts();
+}
+
+renderAdminPosts();
+</script>
+</body>
+</html>

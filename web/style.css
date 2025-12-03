@@ -1,0 +1,158 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Pretendard', sans-serif;
+}
+
+body {
+  background: #f5f7fa;
+  color: #111;
+  padding: 20px;
+  transition: background 0.3s, color 0.3s;
+}
+
+/* 다크모드 */
+body.dark {
+  background: #121212;
+  color: #eee;
+}
+
+/* Glass Card */
+.glass {
+  background: rgba(255, 255, 255, 0.85);
+  border-radius: 16px;
+  padding: 18px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
+  backdrop-filter: blur(15px);
+  margin-bottom: 15px;
+  transition: background 0.3s, border 0.3s;
+}
+
+body.dark .glass {
+  background: rgba(30, 30, 30, 0.95) !important;
+  border: 1px solid #444 !important;
+}
+
+/* 버튼 */
+.btn {
+  background: #007AFF;
+  color: white;
+  padding: 10px 16px;
+  border-radius: 10px;
+  border: none;
+  cursor: pointer;
+  transition: 0.2s;
+  margin: 3px;
+}
+.btn:hover {
+  opacity: 0.85;
+}
+.btn.danger {
+  background: #ff3b30;
+}
+.btn.small {
+  padding: 6px 10px;
+  font-size: 14px;
+}
+
+/* 입력 */
+.input,
+.textarea,
+select {
+  width: 100%;
+  padding: 12px;
+  border-radius: 12px;
+  border: 1px solid #ddd;
+  margin-bottom: 10px;
+  background: rgba(255, 255, 255, 0.85);
+  transition: background 0.3s, border 0.3s, color 0.3s;
+  color: #111;
+}
+
+body.dark .input,
+body.dark .textarea,
+body.dark select {
+  background: rgba(50, 50, 50, 0.95);
+  border: 1px solid #666;
+  color: #eee;
+}
+
+/* 게시글 카드 반응형 */
+#post-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 20px;
+  justify-items: center;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding-bottom: 20px;
+}
+
+/* 댓글 */
+.comment {
+  padding: 10px;
+  margin: 8px 0;
+  border-left: 3px solid #007AFF;
+  background: rgba(255, 255, 255, 0.85);
+  border-radius: 8px;
+  transition: background 0.3s;
+}
+
+body.dark .comment {
+  background: rgba(40, 40, 40, 0.95);
+}
+
+/* 프로필 아바타 */
+.avatar {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  margin-right: 8px;
+}
+
+/* Header 로고 */
+header {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 20px;
+  flex-wrap: wrap;
+}
+
+header .logo-text {
+  font-size: 36px;
+  font-weight: 900;
+  font-family: 'Arial Black', sans-serif;
+  background: linear-gradient(90deg, #007AFF, #4ECDC4, #FFA36C); /* 그라디언트 적용 */
+  color: transparent; /* 텍스트 색을 투명으로 설정 */
+  background-clip: text; /* 텍스트에 그라디언트를 클리핑 */
+  -webkit-background-clip: text; /* 크롬, 사파리에서 지원 */
+  text-shadow: 2px 2px 6px rgba(0, 0, 0, 0.25);
+  text-align: center;
+}
+
+body.dark header .logo-text {
+  text-shadow: 2px 2px 6px rgba(255, 255, 255, 0.25);
+}
+
+/* 모바일 최적화 */
+@media (max-width: 768px) {
+  body {
+    padding: 15px;
+  }
+  header .logo-text {
+    font-size: 28px;
+    margin-bottom: 10px;
+  }
+  #post-list {
+    gap: 15px;
+  }
+}
+
+/* PC 빈 공간 최소화 */
+@media (min-width: 1200px) {
+  #post-list {
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+  }
+}
